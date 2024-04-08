@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import psycopg2
-import os
 from config import DB_CREDENTIALS
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -45,4 +44,4 @@ def track_event():
     return jsonify({"success": "Event tracked successfully"}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()  # (debug=True)
