@@ -1,6 +1,6 @@
-requests==2.26.0
-pandas==1.3.3
-psycopg2-binary==2.9.1
-python-dotenv==0.19.1
-apscheduler==3.10.4
+requests>=2.26.0
+pandas>=1.3.3
+psycopg2-binary>=2.9.1
+python-dotenv>=0.19.1
+apscheduler>=3.10.4
 flask
