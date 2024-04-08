@@ -22,7 +22,7 @@ def track_event():
     cur = conn.cursor()
     try:
         cur.execute("""
-            INSERT INTO your_table_name (event_type, event_name, user_id, utm_source, utm_medium, utm_campaign, utm_content, time_of_event)
+            INSERT INTO tfx_listener (event_type, event_name, user_id, utm_source, utm_medium, utm_campaign, utm_content, time_of_event)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         """, (
             event_data.get('eventType'),
@@ -43,5 +43,6 @@ def track_event():
         cur.close()
         conn.close()
     return jsonify({"success": "Event tracked successfully"}), 200
+
 if __name__ == '__main__':
     app.run(debug=True)
