@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import psycopg2
+import logging
 from config import DB_CREDENTIALS
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -11,7 +12,7 @@ def get_db_connection():
         dbname=DB_CREDENTIALS['database'],
         user=DB_CREDENTIALS['user'],
         password=DB_CREDENTIALS['password'],
-        sslmode=DB_CREDENTIALS['sslmode']  # Get password from an environment variable
+        sslmode=DB_CREDENTIALS['sslmode']  
     )
 @app.route('/track', methods=['POST'])
 
@@ -33,10 +34,12 @@ def track_event():
             event_data.get('utmContent'),
             event_data.get('timeOfEvent')  # Ensure this is formatted correctly for PostgreSQL
         ))
+        logging.info("Event tracked successfully")
         conn.commit()
     except Exception as e:
         print(e)
         conn.rollback()
+        logging.error(f"Failed to insert event data: {e}")
         return jsonify({"error": "Failed to insert event data"}), 500
     finally:
         cur.close()
