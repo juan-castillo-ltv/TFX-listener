@@ -24,7 +24,7 @@ def track_event():
     cur = conn.cursor()
     try:
         cur.execute("""
-            INSERT INTO tfx_listener (event_type, event_name, user_id, utm_source, utm_medium, utm_campaign, utm_content, time_of_event,event_url,app)
+            INSERT INTO app_click_events (event_type, event_name, user_id, utm_source, utm_medium, utm_campaign, utm_content, time_of_event,event_url,app)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
             event_data.get('eventType'),
@@ -36,7 +36,7 @@ def track_event():
             event_data.get('utmContent'),
             event_data.get('timeOfEvent'), # Ensure this is formatted correctly for PostgreSQL
             event_data.get('eventUrl'),
-            "TFX"  
+            event_data.get('appName') 
         ))
         logging.info("Event tracked successfully")
         conn.commit()
