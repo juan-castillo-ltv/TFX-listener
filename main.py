@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 import psycopg2
 import logging
+from flask_cors import CORS  # Import CORS
 from config import DB_CREDENTIALS
-from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS on the Flask app
+
 def get_db_connection():
     return psycopg2.connect(
         host=DB_CREDENTIALS['host'],
