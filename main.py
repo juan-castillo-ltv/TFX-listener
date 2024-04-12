@@ -10,7 +10,7 @@ CORS(app)  # Enable CORS on the Flask app
 logging.basicConfig(level=logging.INFO)
 
 # Set up a connection pool
-connection_pool = psycopg2.pool.SimpleConnectionPool(1, 30,  # minconn, maxconn
+connection_pool = psycopg2.pool.SimpleConnectionPool(1, 25,  # minconn, maxconn
                                                      host=DB_CREDENTIALS['host'],
                                                      port=DB_CREDENTIALS['port'],
                                                      dbname=DB_CREDENTIALS['database'],
